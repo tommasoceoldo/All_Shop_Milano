@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALL SHOP MILANO - Oggetti Firmati</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #000000;
+            padding: 20px;
+            border-bottom: 2px solid #CC7722;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-title {
+            color: #CC7722;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #ffffff;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #CC7722;
+            padding: 10px 15px;
+            border: 1px solid #CC7722;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            background-color: #CC7722;
+            color: #000000;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #25D366;
+            color: #000000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* PAGINA PRINCIPALE */
+        .products {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #CC7722;
+            box-shadow: 0 10px 20px rgba(204, 119, 34, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 250px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            color: #CC7722;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .product-price {
+            color: #CC7722;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .click-hint {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* PAGINA DETTAGLIO */
+        .product-detail {
+            display: flex;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .image-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .detail-image {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .detail-image:hover {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .detail-name {
+            color: #CC7722;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .product-description {
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .detail-price {
+            color: #CC7722;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #CC7722;
+            color: #000000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #e68a33;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(204, 119, 34, 0.3);
+        }
+
+        .buy-now-btn {
+            background-color: #25D366;
+            color: #000000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* PAGINA CARRELLO */
+        .cart-page {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .cart-title {
+            color: #CC7722;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .cart-items {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+            gap: 20px;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            color: #CC7722;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-price {
+            color: #CC7722;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .remove-item {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .remove-item:hover {
+            background: #cc0000;
+        }
+
+        .cart-summary {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid #333;
+        }
+
+        .summary-title {
+            color: #CC7722;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .summary-total {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #CC7722;
+        }
+
+        .checkout-btn {
+            background: #25D366;
+            color: #000000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 50px;
+            color: #888;
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #CC7722;
+        }
+
+        /* MODAL WHATSAPP */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            color: #000000;
+        }
+
+        .modal h2 {
+            color: #000000;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #000000;
+            font-size: 16px;
+        }
+
+        .close-modal {
+            background: #CC7722;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .send-whatsapp {
+            background: #25D366;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #000000;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid #CC7722;
+            margin-top: 50px;
+        }
+
+        .instagram-link {
+            color: #CC7722;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 1px solid #CC7722;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .instagram-link:hover {
+            background-color: #CC7722;
+            color: #000000;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            color: #888;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .product-detail {
+                flex-direction: column;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .products {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* NASCONDI SEZIONI */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- PAGINA PRINCIPALE -->
+    <div id="homePage">
+        <header>
+            <div>
+                <h1 class="main-title">ALL SHOP MILANO</h1>
+                <p class="subtitle">Oggetti Firmati di Alta Qualità - Milano</p>
+            </div>
+            <div class="cart-icon" onclick="showCartPage()">
+                🛒 Carrello
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </header>
+
+        <section class="products">
+            <!-- AIRPODS -->
+            <a href="javascript:void(0)" class="product-card" onclick="showProductDetail('airpods')">
+                <img src="https://i.ibb.co/FLbScSRg/561059442-17854086276550605-6179322120939452908-n.jpg" alt="AirPods" class="product-image">
+                <h3 class="product-name">AirPods</h3>
+                <p class="product-price">€ 35,00</p>
+                <p class="click-hint">Clicca per maggiori dettagli</p>
+            </a>
+
+            <!-- MAGLIA BARCELLONA -->
+            <a href="javascript:void(0)" class="product-card" onclick="showProductDetail('barcellona')">
+                <img src="https://i.ibb.co/93ykMhBR/561680749-17854086471550605-7054920694476061530-n.jpg" alt="Maglia Barcellona" class="product-image">
+                <h3 class="product-name">Maglia Barcellona</h3>
+                <p class="product-price">€ 25,00</p>
+                <p class="click-hint">Clicca per maggiori dettagli</p>
+            </a>
+
+            <!-- CINTURA LOUIS VUITTON -->
+            <a href="javascript:void(0)" class="product-card" onclick="showProductDetail('cintura_lv')">
+                <img src="https://i.ibb.co/3mpMMjrg/561267085-17854088880550605-1758325854859485371-n.jpg" alt="Cintura Louis Vuitton" class="product-image">
+                <h3 class="product-name">Cintura LV</h3>
+                <p class="product-price">€ 20,00</p>
+                <p class="click-hint">Clicca per maggiori dettagli</p>
+            </a>
+
+            <!-- CAPPELLINO GUCCI -->
+            <a href="javascript:void(0)" class="product-card" onclick="showProductDetail('cappello_gucci')">
+                <img src="https://i.ibb.co/XZzC4MbP/561253785-17854088265550605-7376058292171455008-n.jpg" alt="Cappellino Gucci" class="product-image">
+                <h3 class="product-name">Cappellino Gucci</h3>
+                <p class="product-price">€ 15,00</p>
+                <p class="click-hint">Clicca per maggiori dettagli</p>
+            </a>
+
+            <!-- CAPPELLINO LOUIS VUITTON -->
+            <a href="javascript:void(0)" class="product-card" onclick="showProductDetail('cappello_lv')">
+                <img src="https://i.ibb.co/2YmWcQhF/562378039-17854088388550605-3838912090723564619-n.jpg" alt="Cappellino Louis Vuitton" class="product-image">
+                <h3 class="product-name">Cappellino LV</h3>
+                <p class="product-price">€ 15,00</p>
+                <p class="click-hint">Clicca per maggiori dettagli</p>
+            </a>
+
+            <!-- PANTALONCINI POLO -->
+            <a href="javascript:void(0)" class="product-card" onclick="showProductDetail('pantaloncini_polo')">
+                <img src="https://i.ibb.co/99kZKjRf/560802769-17854088097550605-8241055098809872473-n.jpg" alt="Pantaloncini Polo" class="product-image">
+                <h3 class="product-name">Pantaloncini Polo</h3>
+                <p class="product-price">€ 20,00</p>
+                <p class="click-hint">Clicca per maggiori dettagli</p>
+            </a>
+        </section>
+
+        <footer>
+            <a href="https://www.instagram.com/allshopmilano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="instagram-link" target="_blank">
+                📱 @allshopmilano
+            </a>
+            <div class="contact-info">
+                <p>ALL SHOP MILANO - Vendita oggetti firmati</p>
+                <p>📍 Milano | 📧 info@allshopmilano.com</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGINA DETTAGLIO -->
+    <div id="detailPage" class="hidden">
+        <header>
+            <div class="cart-icon" onclick="showCartPage()">
+                🛒 Carrello
+                <span class="cart-count" id="cartCountDetail">0</span>
+            </div>
+            <div>
+                <h1 class="main-title">ALL SHOP MILANO</h1>
+            </div>
+            <a href="javascript:void(0)" class="cart-icon" onclick="showHomePage()" style="text-decoration: none;">
+                ← Home
+            </a>
+        </header>
+
+        <section class="product-detail">
+            <div class="image-container">
+                <img id="detailImage" src="" alt="" class="detail-image">
+            </div>
+            
+            <div class="product-info">
+                <h2 class="detail-name" id="detailName"></h2>
+                <p class="product-description" id="detailDescription"></p>
+                <p class="detail-price" id="detailPrice"></p>
+                
+                <button class="add-to-cart-btn" onclick="addToCart()">
+                    🛒 Aggiungi al Carrello
+                </button>
+                <button class="buy-now-btn" onclick="openWhatsAppModal()">
+                    <i class="fab fa-whatsapp"></i> Ordina via WhatsApp
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <a href="https://www.instagram.com/allshopmilano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="instagram-link" target="_blank">
+                📱 @allshopmilano
+            </a>
+            <div class="contact-info">
+                <p>ALL SHOP MILANO - Vendita oggetti firmati</p>
+                <p>📍 Milano | 📧 info@allshopmilano.com</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PAGINA CARRELLO -->
+    <div id="cartPage" class="hidden">
+        <header>
+            <a href="javascript:void(0)" class="cart-icon" onclick="showHomePage()" style="text-decoration: none;">
+                ← Home
+            </a>
+            <div>
+                <h1 class="main-title">ALL SHOP MILANO</h1>
+            </div>
+            <div style="width: 80px;"></div>
+        </header>
+
+        <section class="cart-page">
+            <h2 class="cart-title">🛒 Il Tuo Carrello</h2>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Gli elementi del carrello verranno aggiunti qui dinamicamente -->
+            </div>
+
+            <div class="cart-summary">
+                <h3 class="summary-title">Riepilogo Ordine</h3>
+                <div class="summary-row">
+                    <span>Subtotale:</span>
+                    <span id="subtotal">€ 0,00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Spedizione:</span>
+                    <span>€ 0,00</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>TOTALE:</span>
+                    <span id="total">€ 0,00</span>
+                </div>
+                
+                <button class="checkout-btn" onclick="openWhatsAppModal()">
+                    <i class="fab fa-whatsapp"></i> ORDINA VIA WHATSAPP
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <a href="https://www.instagram.com/allshopmilano?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="instagram-link" target="_blank">
+                📱 @allshopmilano
+            </a>
+            <div class="contact-info">
+                <p>ALL SHOP MILANO - Vendita oggetti firmati</p>
+                <p>📍 Milano | 📧 info@allshopmilano.com</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MODAL WHATSAPP -->
+    <div id="whatsappModal" class="modal">
+        <div class="modal-content">
+            <h2>📦 Ordina via WhatsApp</h2>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="nome">👤 Nome e Cognome *</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Inserisci il tuo nome completo">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">📞 Numero di Telefono *</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder="Inserisci il tuo numero">
+                </div>
+
+                <div class="form-group">
+                    <label for="indirizzo">📍 Indirizzo di Consegna *</label>
+                    <textarea id="indirizzo" name="indirizzo" required rows="3" placeholder="Via, Civico, Città, CAP"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">📝 Note aggiuntive</label>
+                    <textarea id="note" name="note" rows="3" placeholder="Note per la consegna, ecc."></textarea>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="close-modal" onclick="closeWhatsAppModal()">Annulla</button>
+                    <button type="button" class="send-whatsapp" onclick="inviaOrdineWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Invia Ordine
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURAZIONE
+        const CONFIG = {
+            whatsappNumber: "393757267715",
+            businessName: "ALL SHOP MILANO"
+        };
+
+        // CARRELLO
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let currentProduct = null;
+
+        // PRODOTTI CON DESCRIZIONI ACCATTIVANTI
+        const products = {
+            airpods: {
+                id: 1,
+                name: "AirPods",
+                price: 35,
+                image: "https://i.ibb.co/FLbScSRg/561059442-17854086276550605-6179322120939452908-n.jpg",
+                description: "Vivi la magia del suono senza fili! Gli AirPods offrono un'esperienza audio cristallina con bassi profondi e acuti brillanti. Perfetti per la palestra, il lavoro o il tempo libero. Carica rapida e design ergonomico per un comfort senza pari."
+            },
+            barcellona: {
+                id: 2,
+                name: "Maglia Barcellona",
+                price: 25,
+                image: "https://i.ibb.co/93ykMhBR/561680749-17854086471550605-7054920694476061530-n.jpg",
+                description: "Indossa i colori blaugrana e sentiti un vero campione! Maglia autentica FC Barcellona con tessuto tecnico che allontana il sudore. Design iconico con dettagli precisi e massima vestibilità. Perfetta per tifare o per lo sport quotidiano."
+            },
+            cintura_lv: {
+                id: 3,
+                name: "Cintura LV",
+                price: 20,
+                image: "https://i.ibb.co/3mpMMjrg/561267085-17854088880550605-1758325854859485371-n.jpg",
+                description: "Eleganza senza tempo firmata Louis Vuitton. Cintura in pelle con la caratteristica chiusura dorata e il celebre monogramma. Completa il tuo look con un tocco di lusso francese. Adatta per occasioni formali e casual."
+            },
+            cappello_gucci: {
+                id: 4,
+                name: "Cappellino Gucci",
+                price: 15,
+                image: "https://i.ibb.co/XZzC4MbP/561253785-17854088265550605-7376058292171455008-n.jpg",
+                description: "Stile italiano al suo massimo! Cappellino Gucci con il famoso logo ricamato. Tesa curva perfetta, regolabile per ogni testa. Tessuto di alta qualità che unisce comfort e design. Il must-have per un look streetwear di lusso."
+            },
+            cappello_lv: {
+                id: 5,
+                name: "Cappellino LV",
+                price: 15,
+                image: "https://i.ibb.co/2YmWcQhF/562378039-17854088388550605-3838912090723564619-n.jpg",
+                description: "Raffinatezza in ogni dettaglio. Cappellino Louis Vuitton con il prestigioso monogramma, chiusura regolabile e design urbano chic. Protezione UV e massima vestibilità. Trasforma il tuo outfit quotidiano in una dichiarazione di stile."
+            },
+            pantaloncini_polo: {
+                id: 6,
+                name: "Pantaloncini Polo",
+                price: 20,
+                image: "https://i.ibb.co/99kZKjRf/560802769-17854088097550605-8241055098809872473-n.jpg",
+                description: "Comfort e stile americano si incontrano. Pantaloncini in cotone premium, con design classico e moderno. Perfetti per il tempo libero, la spiaggia o lo sport. Taglio moderno e vestibilità impeccabile per un look sempre al top."
+            }
+        };
+
+        // NAVIGAZIONE
+        function showHomePage() {
+            document.getElementById('homePage').classList.remove('hidden');
+            document.getElementById('detailPage').classList.add('hidden');
+            document.getElementById('cartPage').classList.add('hidden');
+            updateCartCount();
+        }
+
+        function showProductDetail(productId) {
+            currentProduct = products[productId];
+            
+            document.getElementById('detailImage').src = currentProduct.image;
+            document.getElementById('detailName').textContent = currentProduct.name;
+            document.getElementById('detailDescription').textContent = currentProduct.description;
+            document.getElementById('detailPrice').textContent = `€ ${currentProduct.price},00`;
+            
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('detailPage').classList.remove('hidden');
+            document.getElementById('cartPage').classList.add('hidden');
+            updateCartCount();
+        }
+
+        function showCartPage() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('detailPage').classList.add('hidden');
+            document.getElementById('cartPage').classList.remove('hidden');
+            renderCart();
+        }
+
+        // FUNZIONI CARRELLO
+        function addToCart() {
+            if (!currentProduct) return;
+            
+            const existingItem = cart.find(item => item.id === currentProduct.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...currentProduct,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`✅ ${currentProduct.name} aggiunto al carrello!`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+            document.getElementById('cartCountDetail').textContent = count;
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Il tuo carrello è vuoto</h3>
+                        <p>Aggiungi alcuni prodotti fantastici!</p>
+                    </div>
+                `;
+                subtotalElement.textContent = '€ 0,00';
+                totalElement.textContent = '€ 0,00';
+                return;
+            }
+            
+            let subtotal = 0;
+            cartItems.innerHTML = '';
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">€ ${item.price},00 x ${item.quantity} = € ${itemTotal},00</div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart(${item.id})">
+                        ❌ Rimuovi
+                    </button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            subtotalElement.textContent = `€ ${subtotal},00`;
+            totalElement.textContent = `€ ${subtotal},00`;
+        }
+
+        // FUNZIONI WHATSAPP
+        function openWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'flex';
+        }
+
+        function closeWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'none';
+        }
+
+        function inviaOrdineWhatsApp() {
+            const nome = document.getElementById('nome').value;
+            const telefono = document.getElementById('telefono').value;
+            const indirizzo = document.getElementById('indirizzo').value;
+            const note = document.getElementById('note').value;
+
+            if (!nome || !telefono || !indirizzo) {
+                alert("❌ Compila tutti i campi obbligatori!");
+                return;
+            }
+
+            let messaggio = `🛍️ *NUOVO ORDINE* - ${CONFIG.businessName}\n\n`;
+            messaggio += `👤 *Cliente:* ${nome}\n`;
+            messaggio += `📞 *Telefono:* ${telefono}\n`;
+            messaggio += `📍 *Indirizzo:* ${indirizzo}\n\n`;
+            
+            if (cart.length > 0) {
+                messaggio += `📦 *DETTAGLIO ORDINE:*\n`;
+                let total = 0;
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    messaggio += `   • ${item.name}\n`;
+                    messaggio += `     Quantità: ${item.quantity}\n`;
+                    messaggio += `     Prezzo: €${item.price},00 x ${item.quantity} = €${itemTotal},00\n\n`;
+                });
+                messaggio += `💰 *TOTALE: €${total},00*\n\n`;
+            } else if (currentProduct) {
+                // Ordine diretto dalla pagina dettaglio
+                messaggio += `📦 *DETTAGLIO ORDINE:*\n`;
+                messaggio += `   • ${currentProduct.name}\n`;
+                messaggio += `   • Prezzo: €${currentProduct.price},00\n\n`;
+                messaggio += `💰 *TOTALE: €${currentProduct.price},00*\n\n`;
+            }
+            
+            if (note) {
+                messaggio += `📝 *Note:* ${note}\n\n`;
+            }
+            
+            messaggio += `⏰ *Consegna:* Milano e provincia\n`;
+            messaggio += `💬 *Confermo l'ordine!*`;
+
+            const messaggioCodificato = encodeURIComponent(messaggio);
+            const whatsappUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${messaggioCodificato}`;
+            
+            window.open(whatsappUrl, '_blank');
+            closeWhatsAppModal();
+            
+            // Svuota il carrello dopo l'ordine
+            if (cart.length > 0) {
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+            }
+        }
+
+        // INIZIALIZZAZIONE
+        window.onclick = function(event) {
+            const modal = document.getElementById('whatsappModal');
+            if (event.target === modal) {
+                closeWhatsAppModal();
+            }
+        }
+
+        // INIZIALIZZA
+        updateCartCount();
+        showHomePage();
+    </script>
+
+    <!-- Icone Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+</html>
